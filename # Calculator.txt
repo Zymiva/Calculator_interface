@@ -1,0 +1,85 @@
+# Calculator
+
+# This code takes two numbers and an operator from the user and performs the requested calculation
+
+# Check if value entered is a letter Q to stop executing code or if entered value is not a number.
+def error_check(a):
+    if a == "q" or a == "Q":
+        print("Thanks for using this calculator!")
+        return True
+    elif not a.isnumeric():
+        print("PLEASE INPUT NUMBER!")
+        return True
+    return False
+
+# Function to display the calculator interface
+def interface():
+
+    print( "____________________")
+    print( "|     CALCULATOR   |")
+    print( "____________________")
+    print( "wwwwwwwwwwwwwwwwwwww")
+    print( "|                  |")
+    print( "|        "+display_value+"        |")
+    print( "|                  |")
+    print( "wwwwwwwwwwwwwwwwwwww")
+    print( "+---+----+----+----+")
+    print( "| 7    8    9 |  + |")
+    print( "+---+----+----+----+")
+    print( "| 4    5    6 |  - |")
+    print( "+---+----+----+----+")
+    print( "| 1    2    3 |  * |")
+    print( "+---+----+----+----+")
+    print( "| .         C |  / |")
+    print( "+---+----+----+----+")
+    print( "|     0    |   =   |")
+    print( "____________________")
+
+# If code passes all error checks, carry out calculating values and print answer on display
+def calculate(number1, symbol, number2):
+    '''
+    Perform calculation based on the inputted numbers and operator:
+    input1 (int): The first number
+    The operator (+, -, /, *)
+    input2 (int): The second number
+    Returns: The result of the calculation
+    '''
+    if symbol == "+":
+        result = number1 + number2
+    elif symbol == "-":
+        result = number1 - number2
+    elif symbol == "/":
+        result = number1 / number2
+    elif symbol == "*":
+        result = number1 * number2
+    return float(result)
+
+display_value = "0"  
+
+# Loop that takes in input parameters and checks if they are correct type for example number is integer and operator is what is expected.
+while True:
+    interface()
+
+    num1 = input("Please input number: ")
+    if error_check(num1):
+        break
+
+    operator1 = input("Please input one of the operators: ( + , - , / , * ) ")
+    while operator1 not in ["+", "-", "/", "*"]:
+        print("Enter valid operator!")
+        operator1 = input("Please input one of the operators: ( + , - , / , * ) ")
+        if error_check(operator1):
+            break
+
+    num2 = input("Please input number: ")
+    if error_check(num2):
+        break
+# If all above statements are true calculate result and print on the display interface as well as answer, if not show error message.  
+    try:
+        result = calculate(int(num1), operator1, int(num2))
+        display_value = str(result)
+        print(f"Answer: {result}")
+    except ValueError:
+        print("Invalid input. Please try again.")
+    except ZeroDivisionError:
+        print("Cannot divide by zero. Please try again.")
